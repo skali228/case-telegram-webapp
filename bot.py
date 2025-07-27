@@ -1,35 +1,49 @@
+import os
+import sqlite3
 from aiogram import Bot, Dispatcher, types
+from aiogram.filters import Command
 from aiogram.types import WebAppInfo
-import logging
+import asyncio
+from dotenv import load_dotenv
 
-# Настройка логов
-logging.basicConfig(level=logging.INFO)
-bot = Bot(token="7631868105:AAHV0tUBe1Yod7dluVAn8si_ohApRi-g2Ds")
+load_dotenv()
+
+bot = Bot(token=os.getenv('7631868105:AAHV0tUBe1Yod7dluVAn8si_ohApRi-g2Ds'))
 dp = Dispatcher()
 
+# Инициализация БД
+conn = sqlite3.connect('wallets.db')
+cursor = conn.cursor()
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS users (
+    user_id INTEGER PRIMARY KEY,
+    wallet TEXT,
+    balance REAL DEFAULT 0
+)
+''')
+conn.commit()
 
-@dp.message_handler(commands=['start'])
-async def start(message: types.Message):
-    user = message.from_user
 
-    # Кнопка с WebApp
-    keyboard = types.InlineKeyboardMarkup(
-        inline_keyboard=[[
-            types.InlineKeyboardButton(
-                text="🎮 Открыть кейсы",
-                web_app=WebAppInfo(url=f"https://skali228.github.io/case-telegram-webapp/?user_id={user.id}")
-            )
-        ]]
-    )
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    webapp_url = f"https://{os.getenv('GITHUB_USERNAME')}.github.io/{os.getenv('REPO_NAME')}/webapp/?user_id={message.from_user.id}"
 
     await message.answer(
-        f"Привет, {user.first_name}!\n"
-        "Открывай кейсы и забирай призы!",
-        reply_markup=keyboard
+        "Добро пожаловать!",
+        reply_markup=types.InlineKeyboardMarkup(
+            inline_keyboard=[[
+                types.InlineKeyboardButton(
+                    text="🎮 Открыть кейсы",
+                    web_app=WebAppInfo(url=webapp_url)
+                )
+            ]]
+        )
     )
 
 
-if __name__ == '__main__':
-    from aiogram import executor
+async def main():
+    await dp.start_polling(bot)
 
-    executor.start_polling(dp)
+
+if __name__ == "__main__":
+    asyncio.run(main())
