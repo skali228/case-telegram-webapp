@@ -1,105 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CASE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 15px;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .user-card {
-            background: #2a2a2a;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .button-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .button {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        .case-card {
-            background: #2a2a2a;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        .menu {
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #222;
-            padding: 10px 0;
-        }
-    </style>
+    <title>CASE BOT</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1>CASE</h1>
+    <div class="app-container">
+        <header>
+            <h1>CASE</h1>
+            <div id="user-profile">
+                <span id="username">Гость</span>
+                <span id="wallet">Не подключен</span>
+            </div>
+        </header>
+
+        <div class="cases">
+            <div class="case" onclick="openCase(1)">
+                <div class="case-name">Бесплатный кейс</div>
+                <div class="case-price">0 TON</div>
+            </div>
+            <div class="case" onclick="openCase(2)">
+                <div class="case-name">Премиум кейс</div>
+                <div class="case-price">10 TON</div>
+            </div>
+        </div>
+
+        <button id="connect-wallet" onclick="connectWallet()">Подключить кошелек</button>
     </div>
 
-    <div class="user-card">
-        <div class="section-title">1</div>
-        <div><strong>Игорь</strong></div>
-        <div>UQD9N...Qleo</div>
-        <div>0.08</div>
-    </div>
-
-    <div class="section-title">Guess the code from the safe and get bonus</div>
-    <div class="button-group">
-        <button class="button">All</button>
-        <button class="button">Free</button>
-        <button class="button">New</button>
-        <button class="button">Low</button>
-        <button class="button">High</button>
-    </div>
-
-    <div class="case-card">
-        <div class="section-title">Free Case</div>
-        <div>5.55</div>
-    </div>
-
-    <div class="menu">
-        <div>Main</div>
-        <div>Weekly</div>
-        <div>JackPot</div>
-        <div>Upgrade</div>
-        <div>Profile</div>
-    </div>
-
-    <script>
-        // Подключение Telegram WebApp
-        if (window.Telegram && Telegram.WebApp) {
-            Telegram.WebApp.expand();
-            Telegram.WebApp.enableClosingConfirmation();
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
