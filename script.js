@@ -1,26 +1,34 @@
-// Получаем ID пользователя из URL
-const urlParams = new URLSearchParams(window.location.search);
-const userId = urlParams.get('user_id');
-
 // Инициализация Telegram WebApp
 if (window.Telegram && Telegram.WebApp) {
     Telegram.WebApp.expand();
+
+    // Получаем данные пользователя
     const user = Telegram.WebApp.initDataUnsafe.user;
-    
-    document.getElementById('username').textContent = user.first_name;
-    document.getElementById('wallet').textContent = '0.00 TON';
+
+    // Устанавливаем данные пользователя
+    document.querySelector('.username').textContent = user.first_name || 'Гость';
+    document.querySelector('.wallet').textContent = user.username ? `@${user.username}` : 'UIQDSN...Oleo';
+
+    // Можно добавить реальный баланс из вашей системы
 }
 
-function openCase(caseId) {
-    const prizes = {
-        1: ["5 TON", "10 TON", "NFT"],
-        2: ["50 TON", "100 TON", "Редкий NFT"]
-    };
-    
-    const randomPrize = prizes[caseId][Math.floor(Math.random() * prizes[caseId].length)];
-    alert(`🎉 Поздравляем! Вы выиграли: ${randomPrize}`);
-}
+// Обработчики для кейсов
+document.querySelectorAll('.case').forEach(caseItem => {
+    caseItem.addEventListener('click', () => {
+        const caseName = caseItem.querySelector('.case-name').textContent;
+        alert(`Открываем кейс: ${caseName}`);
 
-function connectWallet() {
-    alert("Функция подключения кошелька будет реализована в следующем обновлении");
-}
+        // Здесь будет логика открытия кейса
+        // Можно добавить анимацию и запрос к серверу
+    });
+});
+
+// Обработчики для нижнего меню
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+        document.querySelector('.menu-item.active').classList.remove('active');
+        this.classList.add('active');
+
+        // Здесь будет переключение между разделами
+    });
+});

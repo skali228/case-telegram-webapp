@@ -2,32 +2,72 @@
 <html>
 <head>
     <title>CASE BOT</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
+        <!-- Шапка с пользователем -->
         <header>
-            <h1>CASE</h1>
-            <div id="user-profile">
-                <span id="username">Гость</span>
-                <span id="wallet">Не подключен</span>
+            <div class="user-info">
+                <span class="username">Игорь</span>
+                <span class="wallet">UIQDSN...Oleo</span>
+                <span class="balance">0.08</span>
             </div>
         </header>
 
-        <div class="cases">
-            <div class="case" onclick="openCase(1)">
-                <div class="case-name">Бесплатный кейс</div>
-                <div class="case-price">0 TON</div>
+        <!-- Фильтры -->
+        <div class="filters">
+            <button class="filter active">All</button>
+            <button class="filter">Free</button>
+            <button class="filter">New</button>
+            <button class="filter">Low</button>
+            <button class="filter">High</button>
+        </div>
+
+        <!-- Кейсы -->
+        <div class="cases-grid">
+            <div class="case">
+                <div class="case-image free-case"></div>
+                <div class="case-info">
+                    <div class="case-name">Free Case</div>
+                    <div class="case-price">5.55</div>
+                </div>
             </div>
-            <div class="case" onclick="openCase(2)">
-                <div class="case-name">Премиум кейс</div>
-                <div class="case-price">10 TON</div>
+
+            <div class="case">
+                <div class="case-image premium-case"></div>
+                <div class="case-info">
+                    <div class="case-name">Premium Case</div>
+                    <div class="case-price">10.00</div>
+                </div>
+            </div>
+
+            <div class="case">
+                <div class="case-image rare-case"></div>
+                <div class="case-info">
+                    <div class="case-name">Rare Case</div>
+                    <div class="case-price">25.00</div>
+                </div>
+            </div>
+
+            <div class="case">
+                <div class="case-image exclusive-case"></div>
+                <div class="case-info">
+                    <div class="case-name">Exclusive</div>
+                    <div class="case-price">50.00</div>
+                </div>
             </div>
         </div>
 
-        <button id="connect-wallet" onclick="connectWallet()">Подключить кошелек</button>
+        <!-- Нижнее меню -->
+        <nav class="bottom-menu">
+            <button class="menu-item active">Main</button>
+            <button class="menu-item">Weekly</button>
+            <button class="menu-item">JackPot</button>
+            <button class="menu-item">Upgrade</button>
+            <button class="menu-item">Profile</button>
+        </nav>
     </div>
 
     <script src="script.js"></script>

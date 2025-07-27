@@ -1,16 +1,31 @@
+:root {
+    --primary-color: #1E1E1E;
+    --secondary-color: #2C2C2C;
+    --accent-color: #0077CC;
+    --text-color: #FFFFFF;
+    --text-secondary: #AAAAAA;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background: #1a1a1a;
-    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 15px;
+    padding: 0;
+    height: 100vh;
+    overflow-x: hidden;
 }
 
 .app-container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
+    padding: 15px;
+    padding-bottom: 70px; /* Для нижнего меню */
+    position: relative;
+    min-height: 100vh;
 }
 
+/* Шапка */
 header {
     display: flex;
     justify-content: space-between;
@@ -18,12 +33,52 @@ header {
     margin-bottom: 20px;
 }
 
-#user-profile {
-    text-align: right;
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.wallet {
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
-.cases {
+.balance {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Фильтры */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.filter {
+    background: var(--secondary-color);
+    border: none;
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter.active {
+    background: var(--accent-color);
+}
+
+/* Кейсы */
+.cases-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -31,11 +86,9 @@ header {
 }
 
 .case {
-    background: #2a2a2a;
+    background: var(--secondary-color);
     border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
+    overflow: hidden;
     transition: transform 0.2s;
 }
 
@@ -43,13 +96,72 @@ header {
     transform: scale(1.03);
 }
 
-#connect-wallet {
-    width: 100%;
+.case-image {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+}
+
+.free-case {
+    background-image: url('https://via.placeholder.com/300/0077CC/FFFFFF?text=Free');
+}
+
+.premium-case {
+    background-image: url('https://via.placeholder.com/300/4CAF50/FFFFFF?text=Premium');
+}
+
+.rare-case {
+    background-image: url('https://via.placeholder.com/300/FF5722/FFFFFF?text=Rare');
+}
+
+.exclusive-case {
+    background-image: url('https://via.placeholder.com/300/9C27B0/FFFFFF?text=Exclusive');
+}
+
+.case-info {
     padding: 12px;
-    background: #0077cc;
-    color: white;
+}
+
+.case-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.case-price {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Нижнее меню */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--secondary-color);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+}
+
+.menu-item {
+    background: none;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-item.active {
+    color: var(--accent-color);
+}
+
+/* Адаптация под Telegram WebApp */
+@media (max-height: 700px) {
+    .case-image {
+        height: 100px;
+    }
 }
