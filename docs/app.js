@@ -1,5 +1,5 @@
 const connector = new TonConnect.TonConnect({
-    manifestUrl: 'https://skali228.github.io/case-telegram-webapp/webapp/tonconnect-manifest.json'
+    manifestUrl: 'https://skali228.github.io/case-telegram-webapp/docs/tonconnect-manifest.json'
 });
 
 // Инициализация Telegram WebApp

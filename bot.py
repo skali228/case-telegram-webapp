@@ -26,7 +26,7 @@ conn.commit()
 
 @dp.message(Command("start"))
 async def start_command(message: types.Message):
-    webapp_url = f"https://{os.getenv('GITHUB_USERNAME')}.github.io/{os.getenv('REPO_NAME')}/webapp/?user_id={message.from_user.id}"
+    webapp_url = f"https://skali228.github.io/case-telegram-webapp/docs/?user_id={message.from_user.id}"
 
     await message.answer(
         "Добро пожаловать!",
